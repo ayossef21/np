@@ -77,6 +77,16 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       # - name: Static HTML export with Next.js
       #   run: ${{ steps.detect-package-manager.outputs.runner }} next export
+      - name: Review outcome
+        run: |
+          npx --no-install next build
+          ls -al
+          tar \
+          --dereference --hard-dereference \
+          --directory "$INPUT_PATH" \
+          -cvf "$RUNNER_TEMP/artifact.tar" \
+          --exclude=.git \
+          --exclude=.github \
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
