@@ -79,7 +79,7 @@ jobs:
       #   run: ${{ steps.detect-package-manager.outputs.runner }} next export
       - name: Review outcome
         run: |
-          npx next --no-install run build
+          npx --no-install next build
           ls -al
           tar \
           --dereference --hard-dereference \
